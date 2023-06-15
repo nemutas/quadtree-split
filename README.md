@@ -2,7 +2,7 @@
 
 This repository is [Three.js](https://threejs.org/) template with [Astro](https://astro.build/).
 
-https://nemutas.github.io/three-template-with-astro/
+https://nemutas.github.io/quadtree-split/
 
 # Using
 
