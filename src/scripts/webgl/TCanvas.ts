@@ -14,7 +14,7 @@ export class TCanvas {
   private imageDatas: { [key in string]: ImageData } = {}
   private selectedImageData!: ImageData
   private imageFragments = new THREE.Group()
-  private imageFragmentsHeap!: Heap<THREE.Mesh>
+  private imageFragmentsHeap!: Heap<THREE.Mesh<THREE.BoxGeometry, THREE.MeshStandardMaterial>>
   private imageFragmentGeometry = new THREE.BoxGeometry()
   private imageFragmentMaterial = new THREE.MeshStandardMaterial()
 
@@ -49,7 +49,7 @@ export class TCanvas {
     this.selectedImageData = this.imageDatas['image1']
 
     const colorScoreComparator = (a: THREE.Mesh, b: THREE.Mesh) => b.userData.score - a.userData.score
-    this.imageFragmentsHeap = new Heap<THREE.Mesh>(colorScoreComparator)
+    this.imageFragmentsHeap = new Heap<THREE.Mesh<THREE.BoxGeometry, THREE.MeshStandardMaterial>>(colorScoreComparator)
   }
 
   private createImageDatas() {
@@ -212,6 +212,8 @@ export class TCanvas {
           this.imageFragments.remove(maxScoreImageFragment)
           const { sw, sh, ew, eh } = maxScoreImageFragment.userData
           this.createImageFragments(sw, sh, ew, eh)
+          maxScoreImageFragment.geometry.dispose()
+          maxScoreImageFragment.material.dispose()
         }
 
         this.count = 0
