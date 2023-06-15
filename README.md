@@ -1,11 +1,10 @@
 # About
 
-This repository is [Three.js](https://threejs.org/) template with [Astro](https://astro.build/).
-
 https://nemutas.github.io/quadtree-split/
 
-# Using
+<img src='https://github.com/nemutas/quadtree-split/assets/46724121/ab6d4b2d-45df-4741-960b-fbba48b3847a' width='800' />
 
-- VSCode
-- [WebGL GLSL Editor](https://marketplace.visualstudio.com/items?itemName=raczzalan.webgl-glsl-editor) (v1.3.0 -> If the extension is set to glsl, errors originating from threejs built-in variables will not occur.)
-- [Prettier Plugin for Astro](https://github.com/withastro/prettier-plugin-astro)
+# References
+
+- [四分木の中で最も複雑な領域を分割し続けるアートの作り方](https://zenn.dev/baroqueengine/articles/ccf3ac7a2c9332)
+- [Heap.js](https://github.com/ignlg/heap-js)
