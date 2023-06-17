@@ -101,7 +101,7 @@ export class TCanvas {
     error.r = (error.r / n) ** 0.5
     error.g = (error.g / n) ** 0.5
     error.b = (error.b / n) ** 0.5
-    const score = (error.r + error.g + error.b) / 3
+    const score = error.r + error.g + error.b
 
     return {
       avgColor: new THREE.Color(avgColor.r, avgColor.g, avgColor.b),
@@ -139,6 +139,7 @@ export class TCanvas {
 
     const scaleW = (ew - sw) / this.selectedImageData.width
     const scaleH = (eh - sh) / this.selectedImageData.height
+    const area = scaleW * scaleH
 
     sessors.forEach((sessor) => {
       const data = this.calcImageFragment(sessor.sw, sessor.sh, sessor.ew, sessor.eh)
@@ -155,7 +156,7 @@ export class TCanvas {
         lightness / 2,
       )
       mesh.scale.set(scaleW - 0.002, scaleH - 0.002, lightness)
-      mesh.userData = { score: data.score * scaleW, ...sessor }
+      mesh.userData = { score: data.score * area ** 0.5, ...sessor }
       this.imageFragments.add(mesh)
 
       this.imageFragmentsHeap.push(mesh)
@@ -176,7 +177,6 @@ export class TCanvas {
       this.selectedImageData = this.imageDatas[key]
       this.imageFragments.children.forEach((child) => {
         const mesh = child as THREE.Mesh<THREE.BoxGeometry, THREE.MeshStandardMaterial>
-        mesh.geometry.dispose()
         mesh.material.dispose()
         this.imageFragments.remove(mesh)
       })
@@ -212,7 +212,6 @@ export class TCanvas {
           this.imageFragments.remove(maxScoreImageFragment)
           const { sw, sh, ew, eh } = maxScoreImageFragment.userData
           this.createImageFragments(sw, sh, ew, eh)
-          maxScoreImageFragment.geometry.dispose()
           maxScoreImageFragment.material.dispose()
         }
 
