@@ -112,7 +112,7 @@ export class TCanvas {
   private createLights() {
     gl.scene.add(this.lights)
 
-    const ambientLight = new THREE.AmbientLight('#fff', 0.1)
+    const ambientLight = new THREE.AmbientLight('#fff', 0.2)
     this.lights.add(ambientLight)
 
     const directionalLight = new THREE.DirectionalLight('#fff', 0.5)
